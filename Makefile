@@ -2,7 +2,7 @@ all: benchmark
 	./benchmark +RTS -N16
 
 benchmark: benchmark.hs LazyNaturals.hs
-	ghc --make -O benchmark -threaded
+	ghc -O --make benchmark -threaded
 
 clean:
-	rm -f *.hi *.o
+	rm -f *.hi *.o benchmark
