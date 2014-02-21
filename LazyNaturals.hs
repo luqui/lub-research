@@ -1,5 +1,7 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
 
+module LazyNaturals where
+
 import Data.Lub
 import Data.Glb
 import Data.Unamb
@@ -21,10 +23,14 @@ instance HasLub Nat where
 instance HasGlb Nat where
   glb = onRepr2 glb
 
-
 atLeast :: Integer -> Nat
 atLeast 0 = undefined
 atLeast n = S (atLeast (n-1))
+
+isAtLeast :: Integer -> Nat -> Bool
+isAtLeast 0 _ = True
+isAtLeast n Z = False
+isAtLeast n (S x) = isAtLeast (n-1) x
 
 strictPlus :: Nat -> Nat -> Nat
 strictPlus Z y = y
